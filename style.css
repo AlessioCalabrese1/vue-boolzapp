@@ -1,0 +1,94 @@
+.text-grey{
+    color: grey;
+}
+
+
+#backGround{
+    height: 100vh;
+}
+
+#upper-row{
+    height: 15%;
+    background-color: rgba(0,150,136,255);
+}
+
+#down-row{
+    height: 85%;
+    background-color: rgba(217,219,212,255);
+}
+
+#app{
+    height: 90vh;
+    margin: auto auto;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+}
+
+.user-bar{
+    height: 70px;
+    background-color: rgba(234,234,234,255);
+}
+
+.user{
+    align-items: center;
+}
+
+.avatar-container{
+    width: 15%;
+}
+.avatar-container img{
+    border-radius: 50%;
+}
+
+.color-text-grey{
+    color: rgba(177,177,178,255);
+}
+
+.alert-bar{
+    background-color: rgba(142,218,252,255);
+}
+
+.alert-icon{
+    background-color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.alert-icon-text{
+    color: rgba(142,218,252,255);
+    line-height: 40px;
+}
+
+#search-bar{
+    background-color: rgba(234,234,234,255);
+}
+
+#search-bar button{
+    width: 25%;
+    border-radius: 0;
+    padding: 0;
+    border: 1px solid rgb(196, 196, 196);
+    background-color: white;
+}
+
+#search-bar input{
+    width: 75%;
+    padding: 0;
+    border: 1px solid rgb(196, 196, 196);
+    background-color: white;
+}
+
+.contact-element{
+    background-color: rgba(234,234,234,255);
+    height: 80px;
+}
+
+li .avatar-container{
+    width: 20%;
+}
