@@ -164,11 +164,16 @@ const app = new Vue({
                     }
                 ],
             }
-        ]
+        ],
 
+        contactAvatar: '_8',
+        avatarName: 'Davide',
     },
 
     methods: {
-
+        contactSelector(index){
+            this.contactAvatar = this.contacts[index].avatar;
+            this.avatarName = this.contacts[index].name;
+        }
     },
 });

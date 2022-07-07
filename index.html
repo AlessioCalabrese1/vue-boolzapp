@@ -25,10 +25,10 @@
         </div>
     </div>
 
-    <div id="app" class="container-lg container-md">
+    <div id="app" class="container-xl container-lg container-md">
 
         <div class="row h-100">
-            <div class="col-4 bg-danger h-100 p-0 overflow-auto">
+            <div class="col-4 h-100 p-0 overflow-auto">
                 <div class="user-bar p-2 d-flex">
                     <div class="user d-flex">
                         <div class="avatar-container">
@@ -68,23 +68,21 @@
 
                 <div id="contacts">
                     <ul class="list-group">
-                        <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts">
+                        <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts" @click="contactSelector(index)">
                             <div class="d-flex">
                                 <div class="avatar-container">
                                     <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="img-fluid">
                                 </div>
-                                <div class="ms-2 fw-bold">
+                                <div class="ms-2 fw-bold last-message-container">
                                     {{contact.name}}
                                     <div class="last-message">
-                                        {{contact.messages[1].message}}
+                                        {{contact.messages[contact.messages.length - 1].message}}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="options-button d-flex align-items-center">
-
-                                <i class="fa-solid fa-message mx-2 fs-5 color-text-grey"></i>
-                                <i class="fa-solid fa-ellipsis-vertical mx-2 fs-5 color-text-grey"></i>
+                            <div class="">
+                                12:00
                             </div>
                         </li>
                     </ul>
@@ -92,7 +90,45 @@
             </div>
 
             <div class="col-8 bg-primary h-100 p-0">
+                <div class="user-bar p-2 d-flex justify-content-between">
+                    <div class="user d-flex">
+                        <div class="contact-container">
+                            <img :src="`./img/avatar${contactAvatar}.jpg`" alt="avatar_io" class="img-fluid">
+                        </div>
+                        <div class="ms-2 fw-bold">
+                            {{avatarName}}
+                            <!-- <div class="last-message">
+                                Ultimo accesso oggi alle 12:00
+                            </div> -->
+                        </div>
+                    </div>
 
+                    <div class="options-button d-flex align-items-center">
+                        <i class="fa-solid fa-magnifying-glass mx-2 fs-5 color-text-grey"></i>
+                        <i class="fa-solid fa-paperclip mx-2 fs-5 color-text-grey"></i>
+                        <i class="fa-solid fa-ellipsis-vertical mx-2 fs-5 color-text-grey"></i>
+                    </div>
+                </div>
+
+                <div id="chat">
+
+                </div>
+
+                <div id="chat-bar" class="container-fluid">
+                    <div class="row">
+                        <div class="col-1 happy-face-container text-center">
+                            <i class="fa-regular fa-face-smile fs-4 text-grey"></i>
+                        </div>
+
+                        <div class="col-10 py-3">
+                            <input type="text" placeholder="Scrivi un messaggio" class="p-2 w-100 h-100 rounded border-0">
+                        </div>
+
+                        <div class="col-1 microphone-container text-center">
+                            <i class="fa-solid fa-microphone fs-4 text-grey"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
