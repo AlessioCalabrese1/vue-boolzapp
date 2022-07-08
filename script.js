@@ -1,7 +1,7 @@
 const app = new Vue({
-    el : "#app",
+    el: "#app",
 
-    data : {
+    data: {
         contacts: [
             {
                 name: 'Michele',
@@ -168,35 +168,36 @@ const app = new Vue({
 
         contactAvatar: '_1',
         avatarName: 'Michele',
-        contactMessagesNumber: 0, 
+        contactMessagesNumber: 0,
         newMessageText: "",
     },
 
     methods: {
-        contactSelector(index){
+        contactSelector(index) {
             this.contactAvatar = this.contacts[index].avatar;
-            this.avatarName = this.contacts[index].name; 
+            this.avatarName = this.contacts[index].name;
         },
 
-        viewMessages(index){
+        viewMessages(index) {
             this.contactMessagesNumber = index;
             console.log(this.contactMessagesNumber)
         },
 
-        addNewMessage(newText, stat){
-            const newMessage = {
-                date: '10/01/2020 15:51:00',
-                message: newText,
-                status: stat,
-            }
+        addNewMessage(newText, stat) {
+            if (newText != "" && stat != "") {
+                const newMessage = {
+                    date: '10/01/2020 15:51:00',
+                    message: newText,
+                    status: stat,
+                }
             console.log(newMessage);
             this.contacts[this.contactMessagesNumber].messages.push(newMessage);
             this.newMessageText = "";
+            }
         },
 
-        replyToTheMessage(newText, stat){
-            setTimeout(this.addNewMessage(newText, stat), 10000);
-            setTimeout(alert("ao"), 3000);
+        replyToTheMessage(newText, stat) {
+            setTimeout(this.addNewMessage, 3000, newText, stat);
             console.log(this.contacts[this.contactMessagesNumber].messages);
         },
     },
