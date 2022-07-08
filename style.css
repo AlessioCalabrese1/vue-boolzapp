@@ -126,11 +126,18 @@ li .avatar-container{
     line-height: 70px;
 }
 
-.message-sent{
-    
+.messageSent{
+    padding: 10px;
+    background-color: rgba(213,249,186,255);
+    text-align: end;
 }
 
-.
-message-received{
-    
+.messageReceived{
+    padding: 10px;
+    background-color: white;
+    text-align: start;
+}
+
+ul{
+    list-style: none;
 }

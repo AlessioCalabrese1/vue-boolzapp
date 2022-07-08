@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div id="app" class="container-xl container-lg container-md">
+    <div id="app" class="container">
 
         <div class="row h-100">
             <div class="col-4 h-100 p-0 overflow-auto">
@@ -55,7 +55,7 @@
                             <div>
                                 Ricevi notifiche di nuovi messaggi
                             </div>
-                            
+
                             <a href="#" class="text-grey">Attiva notifiche desktop</a>
                         </div>
                     </div>
@@ -68,10 +68,12 @@
 
                 <div id="contacts">
                     <ul class="list-group">
-                        <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts" @click="contactSelector(index)">
+                        <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts"
+                            @click="contactSelector(index), viewMessages(index)">
                             <div class="d-flex">
                                 <div class="avatar-container">
-                                    <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="img-fluid">
+                                    <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"
+                                        class="img-fluid">
                                 </div>
                                 <div class="ms-2 fw-bold last-message-container">
                                     {{contact.name}}
@@ -111,7 +113,14 @@
                 </div>
 
                 <div id="chat">
-
+                    <ul class="list-group">
+                        <li class="d-flex" v-for="(contact, index) in contacts[contactMessagesNumber].messages"
+                        :class="{'justify-content-end': contact.status == 'sent'}">
+                                <div class="d-inline-block mb-3 rounded" :class="{messageSent: contact.status == 'sent', messageReceived: contact.status == 'received'}">
+                                    {{ contact.message }}
+                                </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div id="chat-bar" class="container-fluid">
@@ -121,7 +130,8 @@
                         </div>
 
                         <div class="col-10 py-3">
-                            <input type="text" placeholder="Scrivi un messaggio" class="p-2 w-100 h-100 rounded border-0">
+                            <input type="text" placeholder="Scrivi un messaggio"
+                                class="p-2 w-100 h-100 rounded border-0">
                         </div>
 
                         <div class="col-1 microphone-container text-center">

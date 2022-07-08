@@ -160,7 +160,7 @@ const app = new Vue({
                     {
                         date: '10/01/2020 15:51:00',
                         message: 'OK!!',
-                        status: 'received'
+                        status: 'sent'
                     }
                 ],
             }
@@ -168,12 +168,18 @@ const app = new Vue({
 
         contactAvatar: '_8',
         avatarName: 'Davide',
+        contactMessagesNumber: 0, 
     },
 
     methods: {
         contactSelector(index){
             this.contactAvatar = this.contacts[index].avatar;
-            this.avatarName = this.contacts[index].name;
+            this.avatarName = this.contacts[index].name; 
+        },
+
+        viewMessages(index){
+            this.contactMessagesNumber = index;
+            console.log(this.contactMessagesNumber)
         }
     },
 });
