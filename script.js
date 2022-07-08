@@ -166,8 +166,8 @@ const app = new Vue({
             }
         ],
 
-        contactAvatar: '_8',
-        avatarName: 'Davide',
+        contactAvatar: '_1',
+        avatarName: 'Michele',
         contactMessagesNumber: 0, 
         newMessageText: "",
     },
@@ -183,14 +183,21 @@ const app = new Vue({
             console.log(this.contactMessagesNumber)
         },
 
-        addNewMessage(newText){
+        addNewMessage(newText, stat){
             const newMessage = {
                 date: '10/01/2020 15:51:00',
                 message: newText,
-                status: 'sent'
+                status: stat,
             }
+            console.log(newMessage);
             this.contacts[this.contactMessagesNumber].messages.push(newMessage);
             this.newMessageText = "";
-        }
+        },
+
+        replyToTheMessage(newText, stat){
+            setTimeout(this.addNewMessage(newText, stat), 10000);
+            setTimeout(alert("ao"), 3000);
+            console.log(this.contacts[this.contactMessagesNumber].messages);
+        },
     },
 });
