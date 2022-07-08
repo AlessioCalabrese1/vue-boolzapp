@@ -203,15 +203,16 @@ const app = new Vue({
         },
 
         searchContact(index){
-            if (this.searchName == "") {
-                this.searchSentinell[index] = true;
-            } else if(this.contacts[index].name.includes(this.searchName)){
-                this.searchSentinell[index] = true;
-            } else{
-                this.searchSentinell[index] = false;
+            for (let i = 0; i < this.searchName.length; i++) {
+                if(this.searchName[i] == this.contacts[index].name[i]){
+                    this.searchSentinell[index] = true;
+                } else{
+                    this.searchSentinell[index] = false;
+                    return this.searchSentinell[index];
+                }
             }
 
-            return this.searchSentinell[index];
+            return true;
         }
     },
 
