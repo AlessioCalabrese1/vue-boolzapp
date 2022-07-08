@@ -63,13 +63,13 @@
 
                 <div id="search-bar" class="p-2 d-flex">
                     <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass text-grey"></i></button>
-                    <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchName" >
                 </div>
 
                 <div id="contacts">
                     <ul class="list-group">
                         <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts"
-                            @click="contactSelector(index), viewMessages(index)">
+                            @click="contactSelector(index), viewMessages(index)"  v-if="searchContact(index)">
                             <div class="d-flex">
                                 <div class="avatar-container">
                                     <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"

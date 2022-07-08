@@ -170,6 +170,8 @@ const app = new Vue({
         avatarName: 'Michele',
         contactMessagesNumber: 0,
         newMessageText: "",
+        searchName: "",
+        searchSentinell: [],
     },
 
     methods: {
@@ -198,7 +200,26 @@ const app = new Vue({
 
         replyToTheMessage(newText, stat) {
             setTimeout(this.addNewMessage, 3000, newText, stat);
-            console.log(this.contacts[this.contactMessagesNumber].messages);
         },
+
+        searchContact(index){
+            if (this.searchName == "") {
+                this.searchSentinell[index] = true;
+            } else if(this.contacts[index].name.includes(this.searchName)){
+                this.searchSentinell[index] = true;
+            } else{
+                this.searchSentinell[index] = false;
+            }
+
+            return this.searchSentinell[index];
+        }
     },
+
+    created(){
+        for (let i = 0; i < this.contacts.length; i++) {
+            const j = true;
+            this.searchSentinell.push(j);
+        }
+        console.log(this.searchSentinell);
+    }
 });
