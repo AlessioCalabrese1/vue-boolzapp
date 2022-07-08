@@ -169,6 +169,7 @@ const app = new Vue({
         contactAvatar: '_8',
         avatarName: 'Davide',
         contactMessagesNumber: 0, 
+        newMessageText: "",
     },
 
     methods: {
@@ -180,6 +181,16 @@ const app = new Vue({
         viewMessages(index){
             this.contactMessagesNumber = index;
             console.log(this.contactMessagesNumber)
+        },
+
+        addNewMessage(newText){
+            const newMessage = {
+                date: '10/01/2020 15:51:00',
+                message: newText,
+                status: 'sent'
+            }
+            this.contacts[this.contactMessagesNumber].messages.push(newMessage);
+            this.newMessageText = "";
         }
     },
 });
