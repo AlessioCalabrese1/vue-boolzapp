@@ -172,6 +172,7 @@ const app = new Vue({
         newMessageText: "",
         searchName: "",
         searchSentinell: [],
+        contactDeletOption: []
     },
 
     methods: {
@@ -213,6 +214,22 @@ const app = new Vue({
             }
 
             return true;
+        },
+        
+        deleteContactOption(index){
+            this.contactDeletOption = [];
+            for (let i = 0; i < this.contacts[this.contactMessagesNumber].messages.length; i++) {
+                const val = true;
+                this.contactDeletOption.push(val);
+            }
+
+            if (this.contactDeletOption[index] = true) {
+                this.contactDeletOption[index] = false;
+            }else{
+                this.contactDeletOption[index] = true;
+            }
+            
+            console.log(this.contactDeletOption);
         }
     },
 
@@ -222,5 +239,11 @@ const app = new Vue({
             this.searchSentinell.push(j);
         }
         console.log(this.searchSentinell);
+
+        for (let i = 0; i < this.contacts[0].messages.length; i++) {
+            const val = true;
+            this.contactDeletOption.push(val);
+        }
+        console.log(this.contactDeletOption)
     }
 });
