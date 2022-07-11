@@ -175,6 +175,7 @@ const app = new Vue({
         contactDeletOption: [],
         controllore: true,
         today: new Date(),
+        optionNotVisible: true
     },
 
     methods: {
@@ -185,14 +186,16 @@ const app = new Vue({
 
         viewMessages(index) {
             this.contactMessagesNumber = index;
+        },
 
-            /* this.contactDeletOption = [];
-            for (let i = 0; i < this.contacts[this.contactMessagesNumber].messages.length; i++) {
-                const val = true;
-                this.contactDeletOption.push(val);
-            } 
+        closeOptions(){
+            for (let i = 0; i < this.contactDeletOption.length; i++) {
+                this.contactDeletOption[i] = true;
+            }
 
-            console.log(this.contactDeletOption); */
+            this.controllore = false;
+            this.optionNotVisible = true;
+            console.log("avvenuto")
         },
 
         addNewMessage(newText, stat) {
@@ -202,7 +205,6 @@ const app = new Vue({
                     message: newText,
                     status: stat,
                 }
-                console.log(newMessage.date);
                 this.contacts[this.contactMessagesNumber].messages.push(newMessage);
                 this.newMessageText = "";
                 const val = true;
@@ -236,31 +238,47 @@ const app = new Vue({
 
             if (this.contactDeletOption[index] == true && this.controllore == true) {
                 this.contactDeletOption[index] = false;
+                this.optionNotVisible = false;
                 this.controllore = false;
             } else {
                 this.contactDeletOption[index] = true;
                 this.controllore = true;
+                this.optionNotVisible = true;
             }
         },
 
         hoursLastMessage(contact) {
-            const onlyHour = contact.messages[contact.messages.length - 1].date.split(' ');
-            onlyHour[onlyHour.length - 1] = onlyHour[onlyHour.length - 1].split(':');
-            onlyHour[onlyHour.length - 1] = `${onlyHour[onlyHour.length - 1][0]}:${onlyHour[onlyHour.length - 1][1]}`
-            return onlyHour[onlyHour.length - 1];
+            if (contact.messages.length != 0) {
+                const onlyHour = contact.messages[contact.messages.length - 1].date.split(' ');
+                onlyHour[onlyHour.length - 1] = onlyHour[onlyHour.length - 1].split(':');
+                onlyHour[onlyHour.length - 1] = `${onlyHour[onlyHour.length - 1][0]}:${onlyHour[onlyHour.length - 1][1]}`
+                return onlyHour[onlyHour.length - 1];
+            }else{
+                return " ";
+            }
         },
 
 
         timeOfTheMessage(contact, index) {
             const onlyHour = contact.date.split(' ');
-            console.log(onlyHour);
             onlyHour[onlyHour.length - 1] = onlyHour[onlyHour.length - 1].split(':');
             onlyHour[onlyHour.length - 1] = `${onlyHour[onlyHour.length - 1][0]}:${onlyHour[onlyHour.length - 1][1]}`
             return onlyHour[onlyHour.length - 1];
         },
 
         deleteMessage(contact, index) {
+            console.log(index)
             this.contacts[this.contactMessagesNumber].messages.splice(index, 1);
+            this.contactDeletOption.splice(index, 1);
+            console.log(this.contactDeletOption)
+        },
+
+        lastMessage(contact){
+            if(contact.messages.length == 0){
+                return " "
+            }else{
+                return contact.messages[contact.messages.length - 1].message;
+            }
         }
     },
 
@@ -274,7 +292,5 @@ const app = new Vue({
             const val = true;
             this.contactDeletOption.push(val);
         }
-
-        console.log(`${this.today.getFullYear()}/${this.today.getMonth()}/${this.today.getDate()} ${this.today.getHours()}/${this.today.getMinutes()}/${this.today.getSeconds()}`);
     }
 });

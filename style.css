@@ -183,14 +183,16 @@ ul{
 
 .list-options-mess-received{
     position: absolute;
-    top: 30px;
-    left: 0;
+    bottom: -45px;
+    right: -45px;
+    z-index: 5;
 }
 
 .list-options-mess-sent{
     position: absolute;
-    top: 30px;
-    left: -50px;
+    bottom: -45px;
+    right: 0px;
+    z-index: 5;
 }
 
 

@@ -34,7 +34,7 @@
     <div id="app" class="container">
 
         <div class="row h-100">
-            <div class="col-4 h-100 p-0 overflow-auto position-relative">
+            <div class="col-4 h-100 p-0 overflow-auto position-relative" @click="closeOptions()">
                 <div class="user-bar p-2 d-flex p-fix">
                     <div class="user d-flex">
                         <div class="avatar-container">
@@ -75,7 +75,7 @@
                 <div id="contacts">
                     <ul class="list-group">
                         <li class="p-2 d-flex contact-element" v-for="(contact, index) in contacts"
-                            @click="contactSelector(index), viewMessages(index)" v-if="searchContact(index)">
+                            @click="contactSelector(index), viewMessages(index), closeOptions()" v-if="searchContact(index)">
                             <div class="d-flex">
                                 <div class="avatar-container">
                                     <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"
@@ -84,7 +84,7 @@
                                 <div class="ms-2 fw-bold last-message-container">
                                     {{contact.name}}
                                     <div class="last-message">
-                                        {{contact.messages[contact.messages.length - 1].message}}
+                                        {{lastMessage(contact)}}
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="col-8 bg-primary h-100 p-0">
-                <div class="user-bar p-2 d-flex justify-content-between">
+                <div class="user-bar p-2 d-flex justify-content-between" @click="closeOptions()">
                     <div class="user d-flex">
                         <div class="contact-container">
                             <img :src="`./img/avatar${contactAvatar}.jpg`" alt="avatar_io" class="img-fluid">
@@ -123,17 +123,18 @@
                         <li class="d-flex" v-for="(contact, index) in contacts[contactMessagesNumber].messages"
                             :class="{'justify-content-end': contact.status == 'sent'}">
                             <div class="d-inline-block mb-3 rounded position-relative hover-element"
-                                :class="{messageSent: contact.status == 'sent', messageReceived: contact.status == 'received'}">
+                                :class="{messageSent: contact.status == 'sent', messageReceived: contact.status == 'received'}" >
                                 {{ contact.message }}
                                 <div class="message-options">
                                     <i class="fa-solid fa-angle-down"
                                         :class="{'back-icon-sent':contact.status == 'sent', 'back-icon-received': contact.status == 'received'}"
                                         @click="deleteContactOption(index)"></i>
-                                    <ul class="list-group list-options"
-                                        :class="{'d-none': contactDeletOption[index] == true, 'list-options-mess-sent':contact.status == 'sent', 'list-options-mess-received': contact.status == 'received'}">
-                                        <li class="list-group-item" @click="deleteMessage(contact, index)">Elimina</li>
-                                    </ul>
                                 </div>
+
+                                <ul class="list-group list-options"
+                                        :class="{'d-none': contactDeletOption[index] == true || optionNotVisible == true, 'list-options-mess-sent':contact.status == 'sent', 'list-options-mess-received': contact.status == 'received'}">
+                                        <li class="list-group-item" @click="deleteMessage(contact, index)">Elimina</li>
+                                </ul>
 
                                 <div class="message-hour">
                                     {{ timeOfTheMessage(contact, index) }}
@@ -143,7 +144,7 @@
                     </ul>
                 </div>
 
-                <div id="chat-bar" class="container-fluid">
+                <div id="chat-bar" class="container-fluid" @click="closeOptions()">
                     <div class="row">
                         <div class="col-1 happy-face-container text-center">
                             <i class="fa-regular fa-face-smile fs-4 text-grey"></i>
