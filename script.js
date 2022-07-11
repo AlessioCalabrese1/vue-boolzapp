@@ -172,7 +172,8 @@ const app = new Vue({
         newMessageText: "",
         searchName: "",
         searchSentinell: [],
-        contactDeletOption: []
+        contactDeletOption: [],
+        controllore: true
     },
 
     methods: {
@@ -184,6 +185,14 @@ const app = new Vue({
         viewMessages(index) {
             this.contactMessagesNumber = index;
             console.log(this.contactMessagesNumber)
+
+            /* this.contactDeletOption = [];
+            for (let i = 0; i < this.contacts[this.contactMessagesNumber].messages.length; i++) {
+                const val = true;
+                this.contactDeletOption.push(val);
+            } 
+
+            console.log(this.contactDeletOption); */
         },
 
         addNewMessage(newText, stat) {
@@ -196,6 +205,8 @@ const app = new Vue({
             console.log(newMessage);
             this.contacts[this.contactMessagesNumber].messages.push(newMessage);
             this.newMessageText = "";
+            const val = true;
+            this.contactDeletOption.push(val);
             }
         },
 
@@ -223,13 +234,21 @@ const app = new Vue({
                 this.contactDeletOption.push(val);
             }
 
-            if (this.contactDeletOption[index] = true) {
+            if (this.contactDeletOption[index] == true && this.controllore == true) {
                 this.contactDeletOption[index] = false;
+                this.controllore = false;
             }else{
                 this.contactDeletOption[index] = true;
+                this.controllore = true;
             }
-            
-            console.log(this.contactDeletOption);
+
+            console.log(this.contactDeletOption)
+        },
+
+        hoursLastMessage(contact){
+            const onlyHour = this.contact.messages[this.contact.messages.length - 1].date;
+            console.log(onlyHour);
+            return onlyHour[onlyHour.length - 1];
         }
     },
 
@@ -244,6 +263,7 @@ const app = new Vue({
             const val = true;
             this.contactDeletOption.push(val);
         }
+        
         console.log(this.contactDeletOption)
     }
 });

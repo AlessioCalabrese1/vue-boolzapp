@@ -15,6 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"></script>
     <title>VUE-BOOLZAP</title>
 </head>
 
@@ -86,8 +89,8 @@
                                 </div>
                             </div>
 
-                            <div class="">
-                                12:00
+                            <div>
+                                {{ contact.messages[contact.messages.length - 1].date.split(" ")[1] }}
                             </div>
                         </li>
                     </ul>
@@ -126,9 +129,14 @@
                                     <i class="fa-solid fa-angle-down"
                                         :class="{'back-icon-sent':contact.status == 'sent', 'back-icon-received': contact.status == 'received'}"
                                         @click="deleteContactOption(index)"></i>
-                                    <ul class="list-group list-options" :class="{'d-none': contactDeletOption[index] == true}">
+                                    <ul class="list-group list-options"
+                                        :class="{'d-none': contactDeletOption[index] == true, 'list-options-mess-sent':contact.status == 'sent', 'list-options-mess-received': contact.status == 'received'}">
                                         <li class="list-group-item">Elimina</li>
                                     </ul>
+                                </div>
+
+                                <div class="message-hour">
+                                    {{ contact.date.split(" ")[1] }}
                                 </div>
                             </div>
                         </li>

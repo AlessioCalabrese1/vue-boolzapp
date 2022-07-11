@@ -139,12 +139,14 @@ li .avatar-container{
     padding: 10px;
     background-color: rgba(213,249,186,255);
     text-align: end;
+    min-height: 50px;
 }
 
 .messageReceived{
     padding: 10px;
     background-color: white;
     text-align: start;
+    min-height: 50px;
 }
 
 ul{
@@ -179,8 +181,26 @@ ul{
     background-color: white;
 }
 
-.list-options{
+.list-options-mess-received{
     position: absolute;
     top: 30px;
     left: 0;
+}
+
+.list-options-mess-sent{
+    position: absolute;
+    top: 30px;
+    left: -50px;
+}
+
+.message-hour{
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#chat li div{
+    max-width: 350px;
+    word-wrap: break-word;
 }
