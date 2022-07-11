@@ -173,7 +173,8 @@ const app = new Vue({
         searchName: "",
         searchSentinell: [],
         contactDeletOption: [],
-        controllore: true
+        controllore: true,
+        today: new Date(),
     },
 
     methods: {
@@ -184,7 +185,6 @@ const app = new Vue({
 
         viewMessages(index) {
             this.contactMessagesNumber = index;
-            console.log(this.contactMessagesNumber)
 
             /* this.contactDeletOption = [];
             for (let i = 0; i < this.contacts[this.contactMessagesNumber].messages.length; i++) {
@@ -198,15 +198,15 @@ const app = new Vue({
         addNewMessage(newText, stat) {
             if (newText != "" && stat != "") {
                 const newMessage = {
-                    date: '10/01/2020 15:51:00',
+                    date: `${this.today.getDate()}/${this.today.getMonth()}/${this.today.getFullYear()} ${this.today.getHours()}:${this.today.getMinutes()}:${this.today.getSeconds()}`,
                     message: newText,
                     status: stat,
                 }
-            console.log(newMessage);
-            this.contacts[this.contactMessagesNumber].messages.push(newMessage);
-            this.newMessageText = "";
-            const val = true;
-            this.contactDeletOption.push(val);
+                console.log(newMessage.date);
+                this.contacts[this.contactMessagesNumber].messages.push(newMessage);
+                this.newMessageText = "";
+                const val = true;
+                this.contactDeletOption.push(val);
             }
         },
 
@@ -214,11 +214,11 @@ const app = new Vue({
             setTimeout(this.addNewMessage, 3000, newText, stat);
         },
 
-        searchContact(index){
+        searchContact(index) {
             for (let i = 0; i < this.searchName.length; i++) {
-                if(this.searchName[i] == this.contacts[index].name[i]){
+                if (this.searchName[i] == this.contacts[index].name[i]) {
                     this.searchSentinell[index] = true;
-                } else{
+                } else {
                     this.searchSentinell[index] = false;
                     return this.searchSentinell[index];
                 }
@@ -226,8 +226,8 @@ const app = new Vue({
 
             return true;
         },
-        
-        deleteContactOption(index){
+
+        deleteContactOption(index) {
             this.contactDeletOption = [];
             for (let i = 0; i < this.contacts[this.contactMessagesNumber].messages.length; i++) {
                 const val = true;
@@ -237,33 +237,44 @@ const app = new Vue({
             if (this.contactDeletOption[index] == true && this.controllore == true) {
                 this.contactDeletOption[index] = false;
                 this.controllore = false;
-            }else{
+            } else {
                 this.contactDeletOption[index] = true;
                 this.controllore = true;
             }
-
-            console.log(this.contactDeletOption)
         },
 
-        hoursLastMessage(contact){
-            const onlyHour = this.contact.messages[this.contact.messages.length - 1].date;
-            console.log(onlyHour);
+        hoursLastMessage(contact) {
+            const onlyHour = contact.messages[contact.messages.length - 1].date.split(' ');
+            onlyHour[onlyHour.length - 1] = onlyHour[onlyHour.length - 1].split(':');
+            onlyHour[onlyHour.length - 1] = `${onlyHour[onlyHour.length - 1][0]}:${onlyHour[onlyHour.length - 1][1]}`
             return onlyHour[onlyHour.length - 1];
+        },
+
+
+        timeOfTheMessage(contact, index) {
+            const onlyHour = contact.date.split(' ');
+            console.log(onlyHour);
+            onlyHour[onlyHour.length - 1] = onlyHour[onlyHour.length - 1].split(':');
+            onlyHour[onlyHour.length - 1] = `${onlyHour[onlyHour.length - 1][0]}:${onlyHour[onlyHour.length - 1][1]}`
+            return onlyHour[onlyHour.length - 1];
+        },
+
+        deleteMessage(contact, index) {
+            this.contacts[this.contactMessagesNumber].messages.splice(index, 1);
         }
     },
 
-    created(){
+    created() {
         for (let i = 0; i < this.contacts.length; i++) {
             const j = true;
             this.searchSentinell.push(j);
         }
-        console.log(this.searchSentinell);
 
         for (let i = 0; i < this.contacts[0].messages.length; i++) {
             const val = true;
             this.contactDeletOption.push(val);
         }
-        
-        console.log(this.contactDeletOption)
+
+        console.log(`${this.today.getFullYear()}/${this.today.getMonth()}/${this.today.getDate()} ${this.today.getHours()}/${this.today.getMinutes()}/${this.today.getSeconds()}`);
     }
 });
